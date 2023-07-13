@@ -1,20 +1,22 @@
 
-import React from 'react';
+import React, { useReducer } from 'react';
 
 import '../styles/PhotoListItem.scss';
+import PhotoFavButton from './PhotoFavButton';
 
 const PhotoListItem = (props) => {
   return (
     <div className='photo-list__item'>
+      <PhotoFavButton />
       <img className='photo-list__image' src={props.imageSource}></img>
-      <div className='photo-list__user-details photo-list__user-info'>
+      {/* <div className='photo-list__user-details photo-list__user-info'>
         <div className='photo-list__user-info'>
           {props.username}
         </div>
         <div className='photo-list__user-location'>
           {props.location.city}, {props.location.country}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
