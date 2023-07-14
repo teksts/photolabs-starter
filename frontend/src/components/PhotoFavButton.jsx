@@ -3,20 +3,22 @@ import React, { useCallback, useState } from 'react';
 import { FavIcon } from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton() {
-
-  const [favorited, setFavorited] = useState(false);
-  
+function PhotoFavButton(props) {
+  const { isFavorited, toggleFavorite, id } = props
   const handleClick = () => {
-    setFavorited(favorited ? false : true);
-    console.log("clicked!");
-  }
-  const props = { fill: favorited ? "#C80000" : "#EEEEEE" };
+    toggleFavorite(id);
+  }; 
 
   return (
     <div className='photo-list__fav-icon' onClick={handleClick}>
       <div className="photo-list__fav-icon-svg">
-        <FavIcon {... props} />
+        <FavIcon
+        width={20}
+        height={17}
+        fill={isFavorited ? "#C80000" : "#EEEEEE"}
+        outlineWidth={2}
+        stroke={'#C80000'}
+        />
       </div>
     </div>
   );
