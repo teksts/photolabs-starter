@@ -1,4 +1,5 @@
 import React, { useState, useReducer } from "react";
+import { useApplicationData } from "../hooks/useApplicationData";
 
 import TopNavigation from "./TopNavigationBar";
 import PhotoList from "./PhotoList";
