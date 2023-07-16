@@ -27,10 +27,10 @@ const HomeRoute = (props) => {
     if (!photoId) return;
 
     if (state.includes(photoId)) {
-      dispatch({type: "REMOVE_FAVORITE", data: photoId})
+      return dispatch({type: "REMOVE_FAVORITE", data: photoId});
     }
 
-    dispatch({type: "ADD_FAVORITE", data: photoId})
+    return dispatch({type: "ADD_FAVORITE", data: photoId});
   };
 
   return (

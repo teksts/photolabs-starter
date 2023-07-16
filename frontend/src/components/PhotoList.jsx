@@ -16,7 +16,7 @@ const PhotoList = (props) => {
       location={photo.location}
       imageSource={photo.urls.regular}
       user={{ "username": photo.user.username, "profile": photo.user.profile }}
-      isFavorited={favorites.includes(photo.id)}
+      favorites={favorites}
       toggleFavorite={toggleFavorite}
       />
     );
