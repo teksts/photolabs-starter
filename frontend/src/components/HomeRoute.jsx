@@ -21,6 +21,7 @@ const reducer = (state, action) => {
 };
 
 const HomeRoute = (props) => {
+  const applicationData = useApplicationData();
 
   const [state, dispatch] = useReducer(reducer, []);
 
@@ -36,8 +37,8 @@ const HomeRoute = (props) => {
 
   return (
     <div className="home-route">
-      <TopNavigation isFavPhotoExist={state.length} />
-      <PhotoList favorites={state} toggleFavorite={toggleFavorite}/>
+      <TopNavigation isFavPhotoExist={applicationData.state.favorites.length} />
+      <PhotoList favorites={applicationData.state.favorites} toggleFavorite={applicationData.updateToFavPhotoIds}/>
     </div>
   );
 };

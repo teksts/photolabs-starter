@@ -34,7 +34,7 @@ export const useApplicationData = () => {
     setShowModal(true)
   };
 
-  appData = {
+  const appData = {
     state: {
       favorites: favorites,
       isModalOpen: isModalOpen
