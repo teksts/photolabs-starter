@@ -1,55 +1,54 @@
 import React, { useState, useReducer } from "react"
 
-export const ACTIONS = {
+const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  TOGGLE_MODAL: 'TOGGLE_MODAL',
   SELECT_PHOTO: 'SELECT_PHOTO',
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
 }
 
-export const useApplicationData = () => {
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case ACTIONS.FAV_PHOTO_ADDED:
-        const favoritesAfterAdd = [
-          ... state,
-          action.data
-        ];
-        return favoritesAfterAdd;
-      case ACTIONS.FAV_PHOTO_REMOVED: 
-        const favoritesAfterRemove = state.filter(id => id !== action.data);
-        return favoritesAfterRemove;
-    }
-  };
-
-  const [favorites, dispatch] = useReducer(reducer, []);
-
-  const updateToFavPhotoIds = (photoId) => {
-    if (!photoId) return;
-
-    if (favorites.includes(photoId)) {
-      return dispatch({type: ACTIONS.FAV_PHOTO_REMOVED, data: photoId});
-    }
-
-    return dispatch({type: ACTIONS.FAV_PHOTO_ADDED, data: photoId});
-  };
-
-
-  const [isModalOpen, setShowModal] = useState(false);
-
-  const toggleModal = () => {
-    setShowModal(true)
-  };
-
-  const appData = {
-    state: {
-      favorites: favorites,
-      isModalOpen: isModalOpen
-    } ,
-    updateToFavPhotoIds: updateToFavPhotoIds,
-    toggleModal: toggleModal
-  }
-  return appData
+const initialState = {
+  favorites: [],
+  currentTopic: null,
+  isModalOpen: false,
 }
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ACTIONS.FAV_PHOTO_ADDED:
+      const favoritesAfterAdd = {
+        ... state,
+        favorites: [
+          ... state.favorites,
+          action.data
+        ]
+      };
+      return favoritesAfterAdd;
+
+    case ACTIONS.FAV_PHOTO_REMOVED: 
+      const favoritesAfterRemove = {
+        ... state, 
+        favorites: state.favorites.filter(id => id !== action.data)
+      };
+      return favoritesAfterRemove;
+
+    case ACTIONS.SET_TOPIC_DATA:
+      const topicAfterUpdate = {
+        ... state,
+        currentTopic: action.data
+      };
+      return topicAfterUpdate;
+    
+    case ACTIONS.TOGGLE_MODAL:
+      const modalAfterToggle = {
+        ... state,
+        isModalOpen: !state.isModalOpen
+      }
+      return modalAfterToggle;
+  }
+};
+
+export { ACTIONS, initialState, reducer }

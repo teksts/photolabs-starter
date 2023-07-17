@@ -1,5 +1,4 @@
 import React, { useState, useReducer } from "react";
-import { useApplicationData } from "../hooks/useApplicationData";
 
 import TopNavigation from "./TopNavigationBar";
 import PhotoList from "./PhotoList";
@@ -7,19 +6,18 @@ import PhotoList from "./PhotoList";
 import "../styles/HomeRoute.scss"
 
 const HomeRoute = (props) => {
-  const applicationData = useApplicationData();
-  const { photoData, topicData } = props
+  const { photoData, topicData, state, updateToFavPhotoIds, setCurrentTopic, toggleModal } = props
 
   return (
     <div className="home-route">
       <TopNavigation 
       topicData={topicData} 
-      isFavPhotoExist={applicationData.state.favorites.length} 
+      isFavPhotoExist={state.favorites.length} 
       />
       <PhotoList
       photoData={photoData}
-      favorites={applicationData.state.favorites} 
-      toggleFavorite={applicationData.updateToFavPhotoIds}
+      favorites={state.favorites} 
+      toggleFavorite={updateToFavPhotoIds}
       />
     </div>
   );
