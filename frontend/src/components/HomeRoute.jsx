@@ -8,11 +8,19 @@ import "../styles/HomeRoute.scss"
 
 const HomeRoute = (props) => {
   const applicationData = useApplicationData();
+  const { photoData, topicData } = props
 
   return (
     <div className="home-route">
-      <TopNavigation isFavPhotoExist={applicationData.state.favorites.length} />
-      <PhotoList favorites={applicationData.state.favorites} toggleFavorite={applicationData.updateToFavPhotoIds}/>
+      <TopNavigation 
+      topicData={topicData} 
+      isFavPhotoExist={applicationData.state.favorites.length} 
+      />
+      <PhotoList
+      photoData={photoData}
+      favorites={applicationData.state.favorites} 
+      toggleFavorite={applicationData.updateToFavPhotoIds}
+      />
     </div>
   );
 };

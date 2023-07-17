@@ -3,10 +3,8 @@ import React from 'react';
 import '../styles/PhotoList.scss';
 import PhotoListItem from './PhotoListItem';
 
-import photoData from "../mocks/photos"
-
 const PhotoList = (props) => {
-  const {favorites, toggleFavorite} = props;
+  const { photoData, favorites, toggleFavorite } = props;
 
   const photoListElements = photoData.map(photo => {
     return (
