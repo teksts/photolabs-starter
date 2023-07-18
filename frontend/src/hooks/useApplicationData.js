@@ -1,5 +1,4 @@
-import React, { useState, useReducer } from "react"
-
+// Global variable listing valid user action types
 const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
@@ -10,6 +9,7 @@ const ACTIONS = {
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
 }
 
+// The initial global state: no favorites, no topic filter, no open modal
 const initialState = {
   favorites: [],
   currentTopic: '',
@@ -23,8 +23,10 @@ const initialState = {
   }
 }
 
+// Reducer manages all global state changes according to action type
 const reducer = (state, action) => {
   switch (action.type) {
+    // Add a favorite
     case ACTIONS.FAV_PHOTO_ADDED:
       const favoritesAfterAdd = {
         ... state,
@@ -35,6 +37,7 @@ const reducer = (state, action) => {
       };
       return favoritesAfterAdd;
 
+    // Remove a favorite
     case ACTIONS.FAV_PHOTO_REMOVED: 
       const favoritesAfterRemove = {
         ... state, 
@@ -42,6 +45,7 @@ const reducer = (state, action) => {
       };
       return favoritesAfterRemove;
 
+    // Set topic filter
     case ACTIONS.SET_TOPIC_DATA:
       const topicAfterUpdate = {
         ... state,
@@ -49,6 +53,7 @@ const reducer = (state, action) => {
       };
       return topicAfterUpdate;
     
+    // Open a modal for a photo
     case ACTIONS.SELECT_PHOTO:
       const selectedPhoto = {
         ... state,
@@ -60,6 +65,7 @@ const reducer = (state, action) => {
       }
       return selectedPhoto;
     
+    // Close an open modal
     case ACTIONS.CLOSE_MODAL:
       const modalAfterClose = {
         ... state,

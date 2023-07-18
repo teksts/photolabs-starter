@@ -1,7 +1,8 @@
+// React
 import React from 'react';
-
+// Components
 import TopicListItem from './TopicListItem';
-
+// Styling
 import '../styles/TopicList.scss';
 
 const TopicList = (props) => {

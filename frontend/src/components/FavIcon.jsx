@@ -1,3 +1,4 @@
+// React
 import React from 'react';
 
 export function FavIcon({
@@ -13,13 +14,5 @@ export function FavIcon({
     </svg>
   );
 }
-
-// FavIcon.defaultProps = {
-//   width: 20,
-//   height: 17,
-//   fill: '#EEEEEE',
-//   outlineWidth: 2,
-//   stroke: '#C80000',
-// }
 
 export default FavIcon;

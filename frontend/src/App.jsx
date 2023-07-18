@@ -1,17 +1,18 @@
+// Hooks
 import React, { useState, useEffect, useReducer } from 'react';
-
 import { ACTIONS, initialState, reducer } from "./hooks/useApplicationData";
-
+// Components
 import HomeRoute from './components/HomeRoute';
-
+// Helpers
+import { fetchData } from './helpers/fetchData';
+// Styling
 import './App.scss';
 
-// Note: Rendering a single component to build components in isolation
-
-
 const App = () => {
+  // All user interaction state is managed globally through reducer and state
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // Manage favorites
   const updateToFavPhotoIds = (photoId) => {
     if (!photoId) return;
 
@@ -22,6 +23,7 @@ const App = () => {
     return dispatch({type: ACTIONS.FAV_PHOTO_ADDED, data: photoId});
   };
 
+  // Filter photos by topic, or reset topic filter
   const setCurrentTopic = (topicId) => {
     if (!topicId) {
       return dispatch({type: ACTIONS.SET_TOPIC_DATA, data: ""});
@@ -29,36 +31,23 @@ const App = () => {
     return dispatch({type: ACTIONS.SET_TOPIC_DATA, data: topicId});
   }
 
+  // Open a photo modal
   const selectPhoto = (photoDetails) => {
     return dispatch({type: ACTIONS.SELECT_PHOTO, data: photoDetails})
   }
 
+  // Close a photo modal
   const closeModal = () => {
     return dispatch({type: ACTIONS.CLOSE_MODAL});
   };
 
-
+  // Each type of data loaded from the API is managed in distinct state
   const [photos, setPhotos] = useState([]);
   const [topics, setTopics] = useState([]);
   
+  // Call a fetch helper to make the correct API call based on whether photos are being filtered by topic, and update if filter status changes
   useEffect(() => {
-    // refactor later to live in separate file, accept paths as parameters
-    const fetchData = async () => {
-      const topicQuery = state.currentTopic
-      let photoRes = await fetch('http://localhost:8001/api/photos');
-      if (topicQuery) {
-        photoRes = await fetch(`http://localhost:8001/api/topics/photos/${topicQuery}`)
-      }
-      const topicRes = await fetch('http://localhost:8001/api/topics');
-      const photoData = await photoRes.json()
-      const topicData = await topicRes.json()
-      const allData = {
-        photoData,
-        topicData
-      }
-      return allData;
-      };
-    fetchData()
+    fetchData(state.currentTopic)
       .then((res) => {
         setPhotos(res.photoData);
         setTopics(res.topicData);
@@ -67,9 +56,6 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* Array.from(Array(3)).map((_, index) => <PhotoListItem key={index}/>) */}
-      {/* <PhotoList/> */}
-      {/* <TopNavigation /> */}
       <HomeRoute 
       photoData={photos} 
       topicData={topics}

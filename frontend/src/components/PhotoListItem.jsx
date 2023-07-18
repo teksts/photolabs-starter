@@ -1,13 +1,15 @@
 
-import React, { useState } from 'react';
-import { createPortal } from 'react-dom';
-
-import '../styles/PhotoListItem.scss';
+// React
+import React from 'react';
+// Components
 import PhotoFavButton from './PhotoFavButton';
-import PhotoDetailsModal from '../routes/PhotoDetailsModal';
+// Styling
+import '../styles/PhotoListItem.scss';
+
 const PhotoListItem = (props) => {
   const { id, favorites, toggleFavorite, imageSource, selectPhoto, similarPhotos } = props
-
+  
+  // Click handler loads photo info into modal property of global state and toggles modal display boolean, opening modal  
   const handleClick = () => {
     const photoDetails = {
       id,
@@ -19,6 +21,7 @@ const PhotoListItem = (props) => {
 
   return (
     <div className='photo-list__item'>
+      {/* Photo fav button affects favorite state */}
       <PhotoFavButton 
       isFavorited={favorites.includes(id)}
       toggleFavorite={toggleFavorite}

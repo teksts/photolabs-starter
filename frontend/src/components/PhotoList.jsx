@@ -1,8 +1,10 @@
+// React
 import React from 'react';
-
-import '../styles/PhotoList.scss';
+// Components
 import PhotoListItem from './PhotoListItem';
 import PhotoDetailsModal from '../routes/PhotoDetailsModal';
+// Styling
+import '../styles/PhotoList.scss';
 
 const PhotoList = (props) => {
   const { photoData, favorites, toggleFavorite, selectPhoto, isModalOpen, closeModal, modalDetails } = props;
@@ -28,6 +30,7 @@ const PhotoList = (props) => {
   return (
     <ul className="photo-list">
       {photoListElements}
+      {/* Modal element rendered on photo click */}
       {isModalOpen && <PhotoDetailsModal
       favorites={favorites}
       toggleFavorite={toggleFavorite}
@@ -39,6 +42,5 @@ const PhotoList = (props) => {
     </ul>
   )
 }
-
 
 export default PhotoList;
