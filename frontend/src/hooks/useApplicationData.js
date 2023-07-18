@@ -12,7 +12,7 @@ const ACTIONS = {
 
 const initialState = {
   favorites: [],
-  currentTopic: null,
+  currentTopic: '',
   isModalOpen: false,
 }
 

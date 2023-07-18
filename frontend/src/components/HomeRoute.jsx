@@ -11,13 +11,15 @@ const HomeRoute = (props) => {
   return (
     <div className="home-route">
       <TopNavigation 
-      topicData={topicData} 
+      topicData={topicData}
+      setCurrentTopic={setCurrentTopic}
       isFavPhotoExist={state.favorites.length} 
       />
       <PhotoList
       photoData={photoData}
       favorites={state.favorites} 
       toggleFavorite={updateToFavPhotoIds}
+      toggleModal={toggleModal}
       />
     </div>
   );

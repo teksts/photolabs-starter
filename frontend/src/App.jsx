@@ -27,7 +27,10 @@ const App = () => {
   };
 
   const setCurrentTopic = (topicId) => {
-    return dispatch({type: ACTIONS.SET_TOPIC_DATA, data: topicId})
+    if (!topicId) {
+      return dispatch({type: ACTIONS.SET_TOPIC_DATA, data: ""});
+    }
+    return dispatch({type: ACTIONS.SET_TOPIC_DATA, data: topicId});
   }
 
   const toggleModal = () => {
@@ -41,10 +44,14 @@ const App = () => {
   useEffect(() => {
     // refactor later to live in separate file, accept paths as parameters
     const fetchData = async () => {
-      const photosRes = await fetch('http://localhost:8001/api/photos');
-      const topicsRes = await fetch('http://localhost:8001/api/topics');
-      const photoData = await photosRes.json()
-      const topicData = await topicsRes.json()
+      const topicQuery = state.currentTopic
+      let photoRes = await fetch('http://localhost:8001/api/photos');
+      if (topicQuery) {
+        photoRes = await fetch(`http://localhost:8001/api/topics/photos/${topicQuery}`)
+      }
+      const topicRes = await fetch('http://localhost:8001/api/topics');
+      const photoData = await photoRes.json()
+      const topicData = await topicRes.json()
       const allData = {
         photoData,
         topicData
@@ -56,7 +63,7 @@ const App = () => {
         setPhotos(res.photoData);
         setTopics(res.topicData);
       });
-  }, [])
+  }, [state.currentTopic])
 
   return (
     <div className="App">
