@@ -16,6 +16,7 @@ const initialState = {
   imageModal: {
     isOpen: false,
     imageDetails: {
+      id: 0,
       similarPhotos: [],
       imageSource: '',
     }

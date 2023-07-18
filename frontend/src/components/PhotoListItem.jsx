@@ -6,10 +6,11 @@ import '../styles/PhotoListItem.scss';
 import PhotoFavButton from './PhotoFavButton';
 import PhotoDetailsModal from '../routes/PhotoDetailsModal';
 const PhotoListItem = (props) => {
-  const { favorites, toggleFavorite, imageSource, selectPhoto, similarPhotos } = props
+  const { id, favorites, toggleFavorite, imageSource, selectPhoto, similarPhotos } = props
 
   const handleClick = () => {
     const photoDetails = {
+      id,
       similarPhotos,
       imageSource
     }
@@ -19,9 +20,9 @@ const PhotoListItem = (props) => {
   return (
     <div className='photo-list__item'>
       <PhotoFavButton 
-      isFavorited={favorites.includes(props.id)}
+      isFavorited={favorites.includes(id)}
       toggleFavorite={toggleFavorite}
-      id={props.id}
+      id={id}
       />
       <img className='photo-list__image' src={imageSource} onClick={handleClick}></img>
       <div className='photo-list__user-details photo-list__user-info'>

@@ -31,6 +31,7 @@ const PhotoList = (props) => {
       {isModalOpen && <PhotoDetailsModal
       favorites={favorites}
       toggleFavorite={toggleFavorite}
+      id={modalDetails.id}
       similarPhotos={modalDetails.similarPhotos}
       imageSource={modalDetails.imageSource}
       closeModal={closeModal} 
