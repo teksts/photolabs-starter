@@ -6,7 +6,7 @@ import PhotoList from "./PhotoList";
 import "../styles/HomeRoute.scss"
 
 const HomeRoute = (props) => {
-  const { photoData, topicData, state, updateToFavPhotoIds, setCurrentTopic, toggleModal } = props
+  const { photoData, topicData, state, updateToFavPhotoIds, setCurrentTopic, selectPhoto, closeModal } = props
 
   return (
     <div className="home-route">
@@ -17,9 +17,12 @@ const HomeRoute = (props) => {
       />
       <PhotoList
       photoData={photoData}
-      favorites={state.favorites} 
+      favorites={state.favorites}
+      isModalOpen={state.imageModal.isOpen}
+      modalDetails={state.imageModal.imageDetails}
       toggleFavorite={updateToFavPhotoIds}
-      toggleModal={toggleModal}
+      selectPhoto={selectPhoto}
+      closeModal={closeModal}
       />
     </div>
   );

@@ -5,7 +5,7 @@ const ACTIONS = {
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
-  TOGGLE_MODAL: 'TOGGLE_MODAL',
+  CLOSE_MODAL: 'CLOSE_MODAL',
   SELECT_PHOTO: 'SELECT_PHOTO',
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
 }
@@ -13,7 +13,13 @@ const ACTIONS = {
 const initialState = {
   favorites: [],
   currentTopic: '',
-  isModalOpen: false,
+  imageModal: {
+    isOpen: false,
+    imageDetails: {
+      similarPhotos: [],
+      imageSource: '',
+    }
+  }
 }
 
 const reducer = (state, action) => {
@@ -42,12 +48,26 @@ const reducer = (state, action) => {
       };
       return topicAfterUpdate;
     
-    case ACTIONS.TOGGLE_MODAL:
-      const modalAfterToggle = {
+    case ACTIONS.SELECT_PHOTO:
+      const selectedPhoto = {
         ... state,
-        isModalOpen: !state.isModalOpen
+        imageModal: {
+          ... state.imageModal,
+          isOpen: true,
+          imageDetails: action.data,
+        }
       }
-      return modalAfterToggle;
+      return selectedPhoto;
+    
+    case ACTIONS.CLOSE_MODAL:
+      const modalAfterClose = {
+        ... state,
+        imageModal: {
+          ... state.imageModal,
+          isOpen: false
+        }
+      };
+      return modalAfterClose;
   }
 };
 

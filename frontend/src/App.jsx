@@ -33,8 +33,12 @@ const App = () => {
     return dispatch({type: ACTIONS.SET_TOPIC_DATA, data: topicId});
   }
 
-  const toggleModal = () => {
-    return dispatch({type: ACTIONS.TOGGLE_MODAL});
+  const selectPhoto = (photoDetails) => {
+    return dispatch({type: ACTIONS.SELECT_PHOTO, data: photoDetails})
+  }
+
+  const closeModal = () => {
+    return dispatch({type: ACTIONS.CLOSE_MODAL});
   };
 
 
@@ -76,7 +80,8 @@ const App = () => {
       state={state}
       updateToFavPhotoIds={updateToFavPhotoIds}
       setCurrentTopic={setCurrentTopic}
-      toggleModal={toggleModal} 
+      selectPhoto={selectPhoto}
+      closeModal={closeModal} 
       />
     </div>
   );

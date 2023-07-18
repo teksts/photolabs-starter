@@ -2,9 +2,10 @@ import React from 'react';
 
 import '../styles/PhotoList.scss';
 import PhotoListItem from './PhotoListItem';
+import PhotoDetailsModal from '../routes/PhotoDetailsModal';
 
 const PhotoList = (props) => {
-  const { photoData, favorites, toggleFavorite } = props;
+  const { photoData, favorites, toggleFavorite, selectPhoto, isModalOpen, closeModal, modalDetails } = props;
 
   const photoListElements = photoData.map(photo => {
     return (
@@ -14,8 +15,11 @@ const PhotoList = (props) => {
       location={photo.location}
       imageSource={photo.urls.regular}
       user={{ "username": photo.user.username, "profile": photo.user.profile }}
+      similarPhotos={photo.similar_photos}
       favorites={favorites}
       toggleFavorite={toggleFavorite}
+      selectPhoto={selectPhoto}
+      closeModal={closeModal}
       />
     );
   });
@@ -24,6 +28,13 @@ const PhotoList = (props) => {
   return (
     <ul className="photo-list">
       {photoListElements}
+      {isModalOpen && <PhotoDetailsModal
+      favorites={favorites}
+      toggleFavorite={toggleFavorite}
+      similarPhotos={modalDetails.similarPhotos}
+      imageSource={modalDetails.imageSource}
+      closeModal={closeModal} 
+      />}
     </ul>
   )
 }

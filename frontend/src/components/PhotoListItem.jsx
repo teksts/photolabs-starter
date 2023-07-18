@@ -6,11 +6,14 @@ import '../styles/PhotoListItem.scss';
 import PhotoFavButton from './PhotoFavButton';
 import PhotoDetailsModal from '../routes/PhotoDetailsModal';
 const PhotoListItem = (props) => {
-  const {favorites, toggleFavorite, imageSource} = props
+  const { favorites, toggleFavorite, imageSource, selectPhoto, similarPhotos } = props
 
-  const [showModal, setShowModal] = useState(false);
   const handleClick = () => {
-    setShowModal(true)
+    const photoDetails = {
+      similarPhotos,
+      imageSource
+    }
+    selectPhoto(photoDetails);
   };
 
   return (
@@ -21,13 +24,6 @@ const PhotoListItem = (props) => {
       id={props.id}
       />
       <img className='photo-list__image' src={imageSource} onClick={handleClick}></img>
-      {showModal && 
-        <PhotoDetailsModal 
-        imageSource={imageSource}
-        setShowModal={setShowModal}
-        favorites={favorites}
-        toggleFavorite={toggleFavorite}
-        />}
       <div className='photo-list__user-details photo-list__user-info'>
         <img className='photo-list__user-profile' src={props.user.profile}></img>
         <div className='photo-list__user-info'>

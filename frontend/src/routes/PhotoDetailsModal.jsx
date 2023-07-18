@@ -4,9 +4,12 @@ import '../styles/PhotoDetailsModal.scss'
 import PhotoList from '../components/PhotoList';
 
 export const PhotoDetailsModal = (props) => {
+  const { closeModal, favorites, toggleFavorite, imageSource, similarPhotos } = props;
+
   const handleClick = () => {
-    props.setShowModal(false)
+    closeModal();
   };
+  
   return (
     <div className='photo-details-modal'>
       <button className='photo-details-modal--close-button' onClick={handleClick}>
@@ -23,12 +26,13 @@ export const PhotoDetailsModal = (props) => {
         </svg>
       </button>
       <div className='photo-details-modal__image'>
-        <img src={props.imageSource}></img>
+        <img src={imageSource}></img>
       </div>
       <div className='photo-details-modal__images'>
         <PhotoList 
-        favorites={props.favorites}
-        toggleFavorite={props.toggleFavorite}
+        photoData={similarPhotos}
+        favorites={favorites}
+        toggleFavorite={toggleFavorite}
         />
       </div>
     </div>
