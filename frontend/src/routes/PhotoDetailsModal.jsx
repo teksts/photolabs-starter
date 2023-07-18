@@ -34,7 +34,7 @@ export const PhotoDetailsModal = (props) => {
       id={id}
       />
       <div className='photo-details-modal__image'>
-        <img src={imageSource}></img>
+        <img className='photo-details-modal__image' src={imageSource}></img>
       </div>
       <div className='photo-details-modal__images'>
         <PhotoList 

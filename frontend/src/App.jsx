@@ -2,10 +2,6 @@ import React, { useState, useEffect, useReducer } from 'react';
 
 import { ACTIONS, initialState, reducer } from "./hooks/useApplicationData";
 
-import PhotoListItem from './components/PhotoListItem';
-import PhotoList from './components/PhotoList';
-import TopicListItem from './components/TopicListItem';
-import TopNavigation from './components/TopNavigationBar';
 import HomeRoute from './components/HomeRoute';
 
 import './App.scss';
