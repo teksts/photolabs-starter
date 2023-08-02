@@ -5,7 +5,7 @@ import PhotoList from '../components/PhotoList';
 import PhotoFavButton from '../components/PhotoFavButton';
 
 export const PhotoDetailsModal = (props) => {
-  const { id, closeModal, favorites, toggleFavorite, imageSource, similarPhotos } = props;
+  const { id, closeModal, favorites, toggleFavorite, imageSource, similarPhotos, selectPhoto } = props;
 
   // Click handler calls state-management callback to adjust modal display boolean, closing modal window
   const handleClick = () => {
